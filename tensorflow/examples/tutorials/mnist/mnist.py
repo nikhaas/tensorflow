@@ -62,6 +62,10 @@ def inference(images, hidden1_units, hidden2_units):
         biases = tf.Variable(tf.zeros([hidden1_units]),
                              name='biases')
         hidden1 = tf.nn.relu(tf.matmul(images, weights) + biases)
+        # Export summaries
+        tf.summary.histogram(str(weights), weights)
+        tf.summary.histogram('biases', biases)
+        tf.summary.histogram('activations', hidden1)
     # Hidden 2
     with tf.name_scope('hidden2'):
         weights = tf.Variable(
@@ -71,6 +75,10 @@ def inference(images, hidden1_units, hidden2_units):
         biases = tf.Variable(tf.zeros([hidden2_units]),
                              name='biases')
         hidden2 = tf.nn.relu(tf.matmul(hidden1, weights) + biases)
+        # Export summaries
+        tf.summary.histogram('weights', weights)
+        tf.summary.histogram('biases', biases)
+        tf.summary.histogram('activations', hidden2)
     # Linear
     with tf.name_scope('softmax_linear'):
         weights = tf.Variable(
@@ -80,6 +88,10 @@ def inference(images, hidden1_units, hidden2_units):
         biases = tf.Variable(tf.zeros([NUM_CLASSES]),
                              name='biases')
         logits = tf.matmul(hidden2, weights) + biases
+        # Export summaries
+        tf.summary.histogram('weights', weights)
+        tf.summary.histogram('biases', biases)
+        tf.summary.histogram('logits', logits)
     return logits
 
 

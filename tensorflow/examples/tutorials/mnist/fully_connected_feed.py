@@ -28,7 +28,7 @@ from six.moves import xrange  # pylint: disable=redefined-builtin
 import tensorflow as tf
 
 from tensorflow.examples.tutorials.mnist import input_data
-from tensorflow.examples.tutorials.mnist import mnist
+import mnist
 
 # Basic model parameters as external flags.
 FLAGS = None
@@ -185,7 +185,6 @@ def run_training():
                 print('Step %d: loss = %.2f (%.3f sec)' % (step, loss_value, duration))
                 # Update the events file.
                 summary_str = sess.run(summary, feed_dict=feed_dict)
-                print(summary_str)
                 summary_writer.add_summary(summary_str, step)
                 summary_writer.flush()
 
