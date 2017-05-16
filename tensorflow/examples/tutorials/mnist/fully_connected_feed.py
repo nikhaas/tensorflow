@@ -128,7 +128,8 @@ def run_training():
         # Build a Graph that computes predictions from the inference model.
         logits = mnist.inference(images_placeholder,
                                  FLAGS.hidden1,
-                                 FLAGS.hidden2)
+                                 FLAGS.hidden2,
+                                 tf.nn.relu)
 
         # Add to the Graph the Ops for loss calculation.
         loss = mnist.loss(logits, labels_placeholder)
